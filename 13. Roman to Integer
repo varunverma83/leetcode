@@ -1,0 +1,47 @@
+'''
+https://leetcode.com/problems/roman-to-integer/
+Convert Roman string to integer value
+'''
+
+d = {
+  "I" : 1,
+  "V" : 5,
+  "X" : 10,
+  "L" : 50,
+  "C" : 100,
+  "D" : 500,
+  "M" : 1000
+}
+
+def romanToInt(roman):
+  global d
+  intval = 0
+  for i in range(len(roman)-1, -1, -1):
+    if intval == 0:
+      intval += d[roman[i]]
+    elif d[roman[i]] >= d[roman[i+1]]:
+      intval += d[roman[i]]
+    elif d[roman[i]] < d[roman[i+1]]:
+      intval -= d[roman[i]]
+  return intval
+
+roman = "III"
+result = romanToInt(roman)
+print(f'Integer value for {roman} is {result} | {result==3}')
+
+roman = "IV"
+result = romanToInt(roman)
+print(f'Integer value for {roman} is {result} | {result==4}')
+
+roman = "IX"
+result = romanToInt(roman)
+print(f'Integer value for {roman} is {result} | {result==9}')
+
+roman = "LVIII"
+result = romanToInt(roman)
+print(f'Integer value for {roman} is {result} | {result==58}')
+
+roman = "MCMXCIV"
+result = romanToInt(roman)
+print(f'Integer value for {roman} is {result} | {result==1994}')
+
